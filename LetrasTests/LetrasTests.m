@@ -10,7 +10,7 @@
 
 @interface LetrasTests : XCTestCase
 
-@property (nonatomic, strong) NSMutableDictionary *dicionarioDeNumeros;
+@property (nonatomic, strong) NSArray *listaDeNumeros;
 
 @end
 
@@ -20,9 +20,8 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.dicionarioDeNumeros = @{@1: @"um",
-                                 @2: @"dois", 
-                                 @3: @"tres"};
+    self.listaDeNumeros = @[@"zero", @"um", @"dois", @"tres", @"quatro", @"cinco",
+                            ];
     
     for (int i = 1; i < 11; i++) {
         NSNumber *numero = [NSNumber numberWithInt:i];
@@ -39,17 +38,17 @@
 
 - (void)testaUm
 {
-    XCTAssertEqual(self.dicionarioDeNumeros[@1], @"um", @"@1 deveria ser um mas veio %@", self.dicionarioDeNumeros[@1]);
+    XCTAssertEqual(self.listaDeNumeros[1], @"um", @"@1 deveria ser um mas veio %@", self.listaDeNumeros[1]);
 }
 
 - (void)testaDois
 {
-    XCTAssertEqual(self.dicionarioDeNumeros[@2], @"dois", @"@1 deveria ser um mas veio %@", self.dicionarioDeNumeros[@2]);
+    XCTAssertEqual(self.listaDeNumeros[2], @"dois", @"@1 deveria ser um mas veio %@", self.listaDeNumeros[2]);
 }
 
 - (void)testaTres
 {
-    XCTAssertEqual(self.dicionarioDeNumeros[@3], @"tres", @"@1 deveria ser um mas veio %@", self.dicionarioDeNumeros[@3]);
+    XCTAssertEqual(self.listaDeNumeros[3], @"tres", @"@1 deveria ser um mas veio %@", self.listaDeNumeros[3]);
 }
 
 @end
