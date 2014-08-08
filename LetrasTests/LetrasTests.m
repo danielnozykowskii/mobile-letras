@@ -34,7 +34,7 @@
         if (i % 10 == 0) {
             [self.listaDeNumeros addObject:novoNumero];
         } else {
-            NSString *resto = [@" e " stringByAppendingString:numerosDeZeroADez[i%10]];
+            NSString *resto = [@"e" stringByAppendingString:numerosDeZeroADez[i%10]];
             [self.listaDeNumeros addObject:[novoNumero stringByAppendingString:resto]];
         }
 //        if (i % 10 >= 2) {
@@ -52,8 +52,16 @@
 //        novoNumero = [novoNumero stringByAppendingString:self.listaDeNumeros[i%10]];
 //        [self.listaDeNumeros addObject:novoNumero];
     }
-    
-    
+    [self.listaDeNumeros addObject:@"cem"];
+}
+
+- (int)somaCaracteres:(int)valor
+{
+    int acumulador=0;
+    for(int i=1;i<=valor;i++){
+        acumulador+= [self.listaDeNumeros[i] length];
+    }
+    return acumulador;
 }
 
 - (void)tearDown
@@ -84,12 +92,23 @@
 
 - (void)testaVinteETres
 {
-    XCTAssertEqualObjects(self.listaDeNumeros[23], @"vinte e tres", @"23 deveria ser vinte e tres um mas veio %@", self.listaDeNumeros[23]);
+    XCTAssertEqualObjects(self.listaDeNumeros[23], @"vinteetres", @"23 deveria ser vinte e tres um mas veio %@", self.listaDeNumeros[23]);
 }
 
 - (void)testaNoventaENove
 {
-    XCTAssertEqualObjects(self.listaDeNumeros[99], @"noventa e nove");
+    XCTAssertEqualObjects(self.listaDeNumeros[99], @"noventaenove");
+}
+
+- (void)testaCem
+{
+    XCTAssertEqualObjects(self.listaDeNumeros[100], @"cem");
+}
+
+- (void)testaSoma123
+{
+    NSLog(@"TESTE: %d", [self somaCaracteres:3]);
+    XCTAssertEqual([self somaCaracteres:3], 10);
 }
 
 @end
