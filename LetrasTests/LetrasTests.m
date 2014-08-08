@@ -10,7 +10,7 @@
 
 @interface LetrasTests : XCTestCase
 
-@property (nonatomic, strong) NSArray *listaDeNumeros;
+@property (nonatomic, strong) NSMutableArray *listaDeNumeros;
 
 @end
 
@@ -20,11 +20,37 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.listaDeNumeros = @[@"zero", @"um", @"dois", @"tres", @"quatro", @"cinco",
-                            ];
+
+    NSArray *numerosDeZeroADez = @[@"zero", @"um", @"dois", @"tres", @"quatro", @"cinco", @"seis", @"sete", @"oito", @"nove", @"dez", @"onze", @"doze", @"treze", @"quatorze", @"quinze", @"dezesseis", @"dezessete", @"dezoito", @"dezenove"];
+    self.listaDeNumeros = [[NSMutableArray alloc] initWithArray:numerosDeZeroADez];
     
-    for (int i = 1; i < 11; i++) {
-        NSNumber *numero = [NSNumber numberWithInt:i];
+    NSArray *numerosDezenas = @[@"",@"", @"vinte", @"trinta", @"quarenta", @"cinquenta",
+                                @"sessenta", @"setenta", @"oitenta", @"noventa"];
+    
+    NSString *novoNumero;
+    
+    for (int i = 20; i < 100; i++) {
+        novoNumero = numerosDezenas[i / 10];
+        if (i % 10 == 0) {
+            [self.listaDeNumeros addObject:novoNumero];
+        } else {
+            NSString *resto = [@" e " stringByAppendingString:numerosDeZeroADez[i%10]];
+            [self.listaDeNumeros addObject:[novoNumero stringByAppendingString:resto]];
+        }
+//        if (i % 10 >= 2) {
+//            novoNumero = numerosDezenas[i/10];
+//            if (i / 10 == 2) {
+//                novoNumero = numerosDezenas;
+//            }
+//
+//            if (i / 10 == 3)
+//                novoNumero = @"trinta";
+//            
+//            if (i / 10 == 4)
+//                novoNumero = @"quarenta";
+//        }
+//        novoNumero = [novoNumero stringByAppendingString:self.listaDeNumeros[i%10]];
+//        [self.listaDeNumeros addObject:novoNumero];
     }
     
     
@@ -49,6 +75,21 @@
 - (void)testaTres
 {
     XCTAssertEqual(self.listaDeNumeros[3], @"tres", @"@1 deveria ser um mas veio %@", self.listaDeNumeros[3]);
+}
+
+- (void)testaVinte
+{
+    XCTAssertEqualObjects(self.listaDeNumeros[20], @"vinte", @"20 deveria ser vinte mas veio %@", self.listaDeNumeros[20]);
+}
+
+- (void)testaVinteETres
+{
+    XCTAssertEqualObjects(self.listaDeNumeros[23], @"vinte e tres", @"23 deveria ser vinte e tres um mas veio %@", self.listaDeNumeros[23]);
+}
+
+- (void)testaNoventaENove
+{
+    XCTAssertEqualObjects(self.listaDeNumeros[99], @"noventa e nove");
 }
 
 @end
